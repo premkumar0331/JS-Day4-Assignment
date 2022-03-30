@@ -1,0 +1,60 @@
+		JS_Assignment_Day-4
+==============================================================
+
+Q1.How to compare two JSON have the same properties without order?
+	a. var obj1 = { name: "Person 1", age:5 };
+	b. var obj2 = { age:5, name: "Person 1" };
+
+Ans: 
+    var obj1 = { name: "Person 1", age:5 };
+    var obj2 = { age:5, name: "Person 1" };
+    let equal = false;
+    function issame(obj1,obj2){
+        let obj1keys = Object.keys(obj1);
+        let obj2keys = Object.keys(obj2);
+        if(obj1keys.length == obj2keys.length){
+            for(let key in obj1){
+                if(obj1[key]==obj2[key]){
+                    equal = true;
+                }else{
+                    equal = false;
+                    break;
+                }
+            }
+        }
+    return equal;
+    }
+    console.log(issame(obj1,obj2)); //output : true;
+
+
+Q2.Use the rest countries API url -> https://restcountries.eu/rest/v2/all and display all the country flags in console;
+
+Ans: 
+    var request = new XMLHttpRequest();
+    let url = "https://raw.githubusercontent.com/rvsp/restcountries-json-data/master/res-countries.json";
+    request.open("GET",url);
+    request.send();
+    request.onload = function(){
+        var data = JSON.parse(request.response);
+        for(var i of data){
+            console.log(i["flag"]);
+        }
+    }
+
+
+Q3.Use the same rest countries and print all countries name, region, sub region and population;
+
+Ans:
+	    var request  = new XMLHttpRequest();
+    let url ="https://raw.githubusercontent.com/rvsp/restcountries-json-data/master/res-countries.json";
+    request.open("GET",url);
+    request.send();
+    request.onload = function(){
+        var data = JSON.parse(request.response);
+        for(var i of data){
+            console.log(`Country Name:${i.name} 
+            Region:${i.region}
+            Sub Region:${i.subregion}
+            Population:${i.population} `);
+        }
+    }
